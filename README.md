@@ -1,37 +1,48 @@
 # unofficial python sdk
 
-#简介
+# 简介
 因为顺丰官方未提供python的SDK，技术支持人员的回复也不够及时。因此在接入的时候花了一点时间。为了避免将来的人走同样的弯路，将自己的代码稍加整理开源出来供参考
 
-#前提
-httplib
-json
-datetime
-sys
+# 前提
+* httplib
+* json
+* datetime
+* sys
 
-#安装
-python setup.py install
+# 安装
+>python setup.py install
 
-#授权
+# 授权
 仅限用于学习交流，请勿用于任何商业用途。
 
-#使用
+# 使用
 下边的使用都假设用户已经申请了顺丰开放平台的appid和appkey
 返回的数据格式见顺丰官方文档
 为保证包的独立性并不失代表性，transMessageId此处的生成方式不能保证多线程的情况下唯一，请用户自行设计
-##申请access_token
+
+## 申请access_token
+
+```
 apply_access_token(
 	appid=appid,
 	appkey=appkey,
 	transMessageId=datetime.now().strftime('%y%m%d%H%M%S%f')
 )
-##查询access_token
+```
+
+## 查询access_token
+
+```
 query_access_token(
 	appid=appid,
 	appkey=appkey,
 	transMessageId=datetime.now().strftime('%y%m%d%H%M%S%f')
 )
-##更新token
+```
+
+## 更新token
+
+```
 sf_req = { 
 	'transMessageId'    :   datetime.now().strftime('%y%m%d%H%M%S%f'),
 	'access_token'      :   access_token,
@@ -42,7 +53,11 @@ refresh_access_token(
 	appkey=appkey,
 	**sf_req
 )
-##订单筛选
+```
+
+## 订单筛选
+
+```
 sf_req = { 
 	'transMessageId'    :   datetime.now().strftime('%y%m%d%H%M%S%f'),
 	'access_token'      :   access_token,
@@ -54,7 +69,11 @@ sf_req = {
 	'consigneeCountry'  :   '中国',
 }   
 filter_order(appid=appid,appkey=appkey,**sf_req)
-##创建订单
+```
+
+## 创建订单
+
+```
 sf_req = { 
     'transMessageId'    :   datetime.now().strftime('%y%m%d%H%M%S%f'),
     'access_token'      :   access_token,
@@ -77,7 +96,11 @@ sf_req = {
     },  
 }   
 create_res = create_order(appid=appid,appkey=appkey,**sf_req)
-##订单结果查询
+```
+
+## 订单结果查询
+
+```
 sf_req = {
     'transMessageId'    :   datetime.now().strftime('%y%m%d%H%M%S%f'),
     'access_token'      :   access_token,
@@ -89,7 +112,11 @@ query_result(
 	appkey=appkey,
 	**sf_req
 )
-##路由查询
+```
+
+## 路由查询
+
+```
 sf_req = { 
     'transMessageId'    :   datetime.now().strftime('%y%m%d%H%M%S%f'),
     'access_token'      :   access_token,
@@ -101,7 +128,11 @@ route_query(
 	appkey=appkey,
 	**sf_req
 )
-##获取运单图片
+```
+
+## 获取运单图片
+
+```
 sf_req = {
     'transMessageId'    :   datetime.now().strftime('%y%m%d%H%M%S%f'),
     'access_token'      :   access_token,
@@ -112,3 +143,4 @@ access_order_img(
 	appkey=appkey,
 	**sf_req
 )
+```
